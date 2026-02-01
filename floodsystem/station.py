@@ -49,12 +49,11 @@ class MonitoringStation:
         else:
             return False
     
-    def inconsistent_typical_range_stations(stations):
-        """makes a list of stations with inconsistent data"""
-
-        inconsistent_stations = []
-        for station in stations:
-            if station.typical_range_consistent() == False:
-                inconsistent_stations.append(station)
-            
-        return inconsistent_stations
+def inconsistent_typical_range_stations(stations):
+    """makes a list of stations with inconsistent data"""
+    inconsistent_stations = []
+    for station in stations:
+        if station.typical_range_consistent() == False:
+            inconsistent_stations.append(station)
+         
+    return inconsistent_stations
