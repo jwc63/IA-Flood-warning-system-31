@@ -10,7 +10,7 @@ def run():
     for s in inconsistent_stations:
         inconsistent_station_names.append(s.name)
 
-        print(sorted(inconsistent_station_names))
+    print(sorted(inconsistent_station_names))
 
 
 if __name__ == "__main__":
