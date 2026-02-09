@@ -1,5 +1,6 @@
 from floodsystem import geo
 from floodsystem.station import MonitoringStation
+from haversine import haversine
 
 def test_stations_by_distance():
     """Tests stations_by_distance"""
