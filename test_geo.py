@@ -26,7 +26,7 @@ def test_stations_within_radius():
 
     stations = [A, B, C]
     p = (0, 0)
-    r = 2000
+    r = 200
 
     result = geo.stations_within_radius(stations, p, r)
     assert A in result
