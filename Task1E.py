@@ -8,7 +8,7 @@ def rivers_by_station_number(stations, N):
     river_counts = [(river, len(stations)) for river, stations in river_to_stations.items()]
     #sorts the tuples into a list
     
-    river_counts.sort(key=lambda x: x[1], reverse=True) #sorts in descending order
+    river_counts.sort(key=lambda x: x[1], reverse=True)
 
     
     if N <= len(river_counts): #checks we have atleast 9 rivers in the list
