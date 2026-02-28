@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 
-# Ensure the name below matches the one in Task2E.py exactly
 def plot_water_levels(station, dates, levels):
     """
     Displays a plot of the water level data against time for a station,
@@ -25,23 +24,23 @@ def plot_water_levels(station, dates, levels):
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from .analysis import polyfit # Import your new math function
+from .analysis import polyfit 
 
 def plot_water_level_with_fit(station, dates, levels, p):
     """Plots water level data and a polynomial fit."""
     
-    # 1. Plot the raw data (the jagged blue line)
+    # Plot the raw data (the jagged blue line)
     plt.plot(dates, levels, '.', label="Raw Data")
     
-    # 2. Calculate the polynomial fit
+    # Calculate the polynomial fit
     poly, d0 = polyfit(dates, levels, p)
     
-    # 3. Create a smooth line for the polynomial
+    #Create a smooth line for the polynomial
     x = mdates.date2num(dates)
     x_smooth = np.linspace(x[0], x[-1], 100)
     plt.plot(x_smooth, poly(x_smooth - d0), label=f"Polynomial fit (degree {p})")
     
-    # 4. Add Typical High/Low lines (reused from Task 2E)
+    # Add typical range lines if consistent
     if station.typical_range_consistent():
         plt.axhline(y=station.typical_range[0], color='g', linestyle='--', label='Typical Low')
         plt.axhline(y=station.typical_range[1], color='r', linestyle='--', label='Typical High')

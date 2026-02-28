@@ -1,27 +1,26 @@
 import datetime
 
-# Using the Task 1D/2E style of imports
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.flood import stations_highest_rel_level
 from floodsystem.datafetcher import fetch_measure_levels
 from floodsystem.plot import plot_water_level_with_fit
 
 def run():
-    # 1. Build and update station data
+    #Build and update station data
     print("Step 1: Building station list...")
     stations = build_station_list()
     
-    # This step fetches real-time data from the EA server
+    #fetches real-time data from the EA server and updates each station
     print("Step 2: Updating water levels (this may take a moment)...")
     update_water_levels(stations)
 
-    # 2. Get the top 5 stations with highest relative levels
+    #Get the top 5 stations with highest relative levels
     print("Step 3: Finding top 5 at-risk stations...")
-    top_5 = stations_highest_rel_level(stations, 5)
+    top_5 = stations_highest_rel_level(stations, 5) 
 
-    # 3. Fetch history and plot with polynomial fit
-    dt = 2      # We fetch 2 days of history for a clear trend line
-    degree = 4  # Polynomial degree as per task instructions
+    #Fetch history and plot with polynomial fit
+    dt = 2      #fetches 2 days of history for trend line
+    degree = 4  # Polynomial degree
     
     print(f"Step 4: Fetching 2-day history and plotting with degree {degree} fit...")
 
