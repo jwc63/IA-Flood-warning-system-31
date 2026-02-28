@@ -17,8 +17,7 @@ class MonitoringStation:
         self.station_id = station_id
         self.measure_id = measure_id
 
-        # Handle case of erroneous data where data system returns
-        # '[label, label]' rather than 'label'
+       
         self.name = label
         if isinstance(label, list):
             self.name = label[0]
