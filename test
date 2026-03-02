@@ -1,0 +1,68 @@
+# test_Task1D_combined.py
+"""
+Unit tests for Task 1D functions and MonitoringStation class
+"""
+
+from Task1D import rivers_with_station, stations_by_river
+from floodsystem.station import MonitoringStation
+
+# --- Tests for MonitoringStation class ---
+def test_create_monitoring_station():
+    """Test that the MonitoringStation class stores attributes correctly."""
+    s_id = "test-s-id"
+    m_id = "test-m-id"
+    label = "Test Station"
+    coord = (52.0, 0.1)
+    trange = (0.2, 1.0)
+    river = "River X"
+    town = "Test Town"
+
+    s = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
+
+    assert s.station_id == s_id
+    assert s.measure_id == m_id
+    assert s.name == label
+    assert s.coord == coord
+    assert s.typical_range == trange
+    assert s.river == river
+    assert s.town == town
+
+# --- Tests for Task 1D functions ---
+def test_rivers_with_station():
+    """Test rivers_with_station() function."""
+    # Create fake stations
+    s1 = MonitoringStation("id1", "m1", "A", (0,0), (0,1), "River X", "Town1")
+    s2 = MonitoringStation("id2", "m2", "B", (0,0), (0,1), "River Y", "Town2")
+    s3 = MonitoringStation("id3", "m3", "C", (0,0), (0,1), "River X", "Town3")
+    s4 = MonitoringStation("id4", "m4", "D", (0,0), (0,1), None, "Town4")  # no river
+    stations = [s1, s2, s3, s4]
+
+    rivers = rivers_with_station(stations)
+
+    assert "River X" in rivers
+    assert "River Y" in rivers
+    assert None not in rivers
+    assert len(rivers) == 2  # duplicates ignored
+
+def test_stations_by_river():
+    """Test stations_by_river() function."""
+    # Create fake stations
+    s1 = MonitoringStation("id1", "m1", "A", (0,0), (0,1), "River X", "Town1")
+    s2 = MonitoringStation("id2", "m2", "B", (0,0), (0,1), "River Y", "Town2")
+    s3 = MonitoringStation("id3", "m3", "C", (0,0), (0,1), "River X", "Town3")
+    s4 = MonitoringStation("id4", "m4", "D", (0,0), (0,1), None, "Town4")  # no river
+    stations = [s1, s2, s3, s4]
+
+    river_dict = stations_by_river(stations)
+
+    # Check that dictionary has correct keys
+    assert "River X" in river_dict
+    assert "River Y" in river_dict
+    assert None not in river_dict
+
+    # Check that stations are grouped correctly
+    river_x_names = set(station.name for station in river_dict["River X"])
+    river_y_names = set(station.name for station in river_dict["River Y"])
+    
+    assert river_x_names == {"A", "C"}
+    assert river_y_names == {"B"}
