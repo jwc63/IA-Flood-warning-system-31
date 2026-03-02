@@ -8,9 +8,9 @@ def test_stations_level_over_threshold():
     B = MonitoringStation('idB', 'measureB', 'B', (1, 1), (0, 1), 'riverB', 'townB')
     C = MonitoringStation('idC', 'measureC', 'C', (-2, -2), (0, 1), 'riverC', 'townC')
 
-    A._relative_water_level = 0.9
-    B._relative_water_level = 0.7
-    C._relative_water_level = None
+    A.relative_water_level = 0.9
+    B.relative_water_level = 0.7
+    C.relative_water_level = None
 
     stations = [A, B, C]
     tol = 0.8
@@ -27,10 +27,10 @@ def test_stations_highest_rel_level():
     C = MonitoringStation('idC', 'measureC', 'C', (-2, -2), (0, 1), 'riverC', 'townC')
     D = MonitoringStation('idD', 'measureD', 'D', (-2, -2), (0, 1), 'riverD', 'townD')
 
-    A._relative_water_level = 0.9
-    B._relative_water_level = 0.7
-    C._relative_water_level = None
-    D._relative_water_level = 0.8
+    A.relative_water_level = 0.9
+    B.relative_water_level = 0.7
+    C.relative_water_level = None
+    D.relative_water_level = 0.8
     stations = [A, B, C, D]
     N = 2
 
