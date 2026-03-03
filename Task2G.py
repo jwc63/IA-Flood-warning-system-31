@@ -1,17 +1,21 @@
 import numpy as np
+from floodsystem.datafetcher import fetch_measure_levels
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.flood import stations_highest_rel_level
 from floodsystem.analysis import polyfit 
 
 def increasing_stations(stations, tol):
-    # Calculate the polynomial fit
-    poly, d0 = polyfit(dates, levels, p)
-
-    #calculate derivative
-    poly_deriv = np.polyder(poly)
-
     increasing = []
     for station in stations:
+        dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=dt))
+        p = 4 #degree of polynomial fit
+    
+        # Calculate the polynomial fit
+        poly, d0 = polyfit(dates, levels, p)
+
+        #calculate derivative
+        poly_deriv = np.polyder(poly)
+    
         if station.relative_water_level() != None and poly_deriv(d0) > tol:
             increasing.append(station)
     return increasing
@@ -42,7 +46,7 @@ def run():
     low_risk = []
 
     for station in stations:
-        risk = risk_level(station, 1.2, 0.1, 0.05)
+        risk = risk_level(station, 1.5, 1.2, 0.8)
         increasing = increasing_stations(stations, 0.1)
         if risk == "Severe" or ((risk == "High" or risk == "Moderate") and station in increasing):
             severe_risk.append(station.town)
