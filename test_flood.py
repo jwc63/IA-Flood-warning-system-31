@@ -15,7 +15,7 @@ def test_stations_level_over_threshold():
     stations = [A, B, C]
     tol = 0.8
 
-    result = flood.stations_level_over_threshold(stations, tol)
+    result = stations_level_over_threshold(stations, tol)
     assert result[0][0] == A
     assert result[0][1] == 0.9
 
@@ -34,7 +34,7 @@ def test_stations_highest_rel_level():
     stations = [A, B, C, D]
     N = 2
 
-    result = flood.stations_highest_rel_level(stations, N)
+    result = stations_highest_rel_level(stations, N)
     assert result[0][0] == A
     assert result[0][1] == 0.9
     assert result[1][0] == D
