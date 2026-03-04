@@ -1,7 +1,7 @@
 import numpy as np
 from floodsystem.station import MonitoringStation
 
-from Task2G import increasing_stations, risk_level
+from Task2G import risk_level
 
 def test_risk_level():
     """Tests the risk_level function"""
